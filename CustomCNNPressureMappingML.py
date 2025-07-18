@@ -178,7 +178,7 @@ if __name__ == "__main__":
     
     def train_model(model, train_loader, val_loader, device):
         criterion = nn.CrossEntropyLoss()
-        optimizer = optim.Adam(model.parameters(), lr=0.00005)
+        optimizer = optim.Adam(model.parameters(), lr=0.00001)
         model.to(device)
         loss_arr = []
         eval_loss_arr = []
@@ -227,13 +227,12 @@ if __name__ == "__main__":
                     print(f"Early stopping at epoch {epoch+1}")
                     break
 
-    
         if best_model_state:
             model.load_state_dict(best_model_state)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = create_model()
     train_model(model, train_loader=train_loader, val_loader=val_loader, device=device)
-    torch.save(model.state_dict(), "best_binary_model.pth")
+    torch.save(model.state_dict(), "best_binary_model.pth", _use_new_zipfile_serialization=True)
 
     test_model(model, test_loader, device)

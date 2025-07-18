@@ -128,6 +128,6 @@ if check_password():
             save_model = st.button("Save Updated Model")
             if save_model:
                 st.header("THIS WILL PERMANENTLY CHANGE THE MODEL TO LEARN FROM YOUR IMAGE(s)", )
-                torch.save(model.state_dict(), "best_binary_model.pth")
+                torch.save(model.state_dict(), "best_binary_model.pth", _use_new_zipfile_serialization=True)
                 st.success("Model saved to best_binary_model.pth")
 
