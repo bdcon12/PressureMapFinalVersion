@@ -7,7 +7,7 @@ from PIL import Image
 import os
 
 
-
+st.write("working")
 def check_password():
     def password_entered():
         if st.session_state["password"] == st.secrets["general"]["password"]:
@@ -73,6 +73,7 @@ if check_password():
             model.load_state_dict(torch.load(path, map_location=torch.device('cpu')))
         model.eval()
         return model
+    model = load_model()
 
     # Preprocessing
     transform = transforms.Compose([
@@ -104,7 +105,7 @@ if check_password():
     learning_mode = st.checkbox("Enable Learning Mode")
     uploaded_files = st.file_uploader("Upload Image(s)", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
 
-    model = load_model()
+    
 
     if uploaded_files:
         for uploaded_file in uploaded_files:
